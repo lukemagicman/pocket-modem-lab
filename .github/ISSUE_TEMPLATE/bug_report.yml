@@ -1,0 +1,34 @@
+name: Bug report
+description: 报告可复现的问题；请勿提交敏感设备或 SIM 数据
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: 提交前请删除号码、短信、IMEI/IMSI/ICCID/EID、Token、密码和订阅地址。
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware revision
+      description: 例如 UFI003 主板版本；不要填写设备唯一标识。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and redacted logs
+    validations:
+      required: true
+

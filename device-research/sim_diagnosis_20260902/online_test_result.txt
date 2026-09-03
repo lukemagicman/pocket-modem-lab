@@ -1,0 +1,42 @@
+DMS online experiment, 2026-09-02
+
+Authorized runtime change:
+  qmicli --dms-set-operating-mode=online
+
+Before:
+  DMS mode=shutting-down
+  AT CFUN=0
+  UIM card=no-atr-received
+  NAS radio interface=none
+
+After:
+  DMS mode=online
+  AT CFUN=1
+  NAS radio interface=LTE
+  NAS sees PLMN 460-00 in limited/searching state
+  LTE RSSI=-85 dBm, RSRP=-119 dBm, RSRQ=-15 dB, SNR=2.8 dB
+  UIM card remains no-atr-received
+  DMS PIN remains UimUninitialized
+  AT+CPIN? remains CME ERROR 10
+
+Conclusion:
+  Online mode successfully restores the radio path but does not restore SIM ATR.
+  The user subsequently confirmed that no SIM card was inserted during this
+  experiment. Therefore no-atr-received is expected and does not indicate a
+  hardware fault. Do not perform a UIM power cycle; repeat status collection only
+  after a target SIM is inserted with the stick powered off.
+
+Boot image note:
+  Factory Android boot.bin contains 33 generic Qualcomm MSM8916/8936/8939/APQ8016
+  reference-board DTBs, not a clearly named UFI003 DTB. Current OpenStick boot has
+  one embedded DTB identifying itself as uz801 v3.0. No explicit SIM/UIM node was
+  found in the current Linux DT; this mismatch is suspicious but not yet causal.
+  Because the slot was empty, device-tree mismatch should not be treated as the
+  cause of the observed no-ATR state.
+
+China Unicom physical SIM retest:
+  The user powered off, reseated a China Unicom SIM and cold-booted the stick.
+  The Reliance boot hook completed successfully. After DMS online was confirmed,
+  UIM still returned no-atr-received and DMS PIN remained UimUninitialized.
+  Reseating did not change the result. The next discriminating physical test is
+  a second known-good SIM (Red Pocket) in the same slot.

@@ -1,0 +1,57 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.osbackup
+local.properties
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Android / Gradle
+.gradle/
+.toolchain/
+**/build/
+dist/
+*.apk
+*.aab
+
+# Firmware, device images and raw captures
+*.img
+*.bin
+*.mbn
+*.elf
+*.raw
+*.qcn
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.deb
+backup/
+firmware/
+rootfs*/
+mcfg_all/
+
+# Diagnostics and local working state
+qa-output/
+CURRENT_WORKING_MEMORY.md
+*.log
+*.tmp
+*.bak
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+

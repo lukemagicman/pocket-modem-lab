@@ -1,0 +1,13 @@
+[Unit]
+Description=Select Reliance MCFG before ModemManager
+After=systemd-udev-trigger.service
+Before=ModemManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/ufi003-select-reliance
+TimeoutStartSec=60
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

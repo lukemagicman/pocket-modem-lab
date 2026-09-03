@@ -1,0 +1,18 @@
+Active:
+  Commercial-SRLTE-SS-CT
+  Version: 0x2011389
+  ID: 36:92:73:74:AC:CA:A3:44:0C:8C:15:BC:2C:65:DA:38:A9:52:FE:25
+
+Inactive:
+  ROW_Generic_3GPP
+  Commercial-Airtel
+  Commercial-CSFB-SS-CU
+  Commercial-CSFB-SS-CMCC
+  Commercial-Reliance
+
+Reliance:
+  Size: 29816
+  Version: 0x2011B75
+  ID: F8:65:20:0A:37:94:52:73:8A:56:9B:AD:C1:3E:ED:9F:EB:5C:6C:F4
+
+Platform configurations: 0.

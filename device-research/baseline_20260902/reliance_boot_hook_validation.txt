@@ -1,0 +1,34 @@
+Reliance MCFG boot hook validation, 2026-09-02
+
+Installed files:
+  /usr/local/sbin/ufi003-select-reliance
+  SHA256 e801416505688afebc74de4f3d5077d87f0c399144e2c4b44cbfeb0e51d5c463
+
+  /etc/systemd/system/ufi003-reliance-mcfg.service
+  SHA256 84d899cf321b498c4f91d143ae096dd6920f490d38cd73b68e894dc150735b9d
+
+Corrected cold boot validation 1:
+  Boot default active config: Commercial-SRLTE-SS-CT
+  Hook set pending Reliance, activated it, waited for the expected QMI endpoint
+  cycle, then verified Reliance active through a fresh PDC client.
+  Hook result: status=0/SUCCESS
+  ModemManager: active
+  QMI services: ims (1.0), imsp (1.0), imsa (1.0)
+
+Corrected cold boot validation 2:
+  Same transition CT -> Reliance.
+  Hook result: status=0/SUCCESS
+  ModemManager: active
+  Reliance status: Active
+  QMI services: ims (1.0), imsp (1.0), imsa (1.0)
+
+Final device state:
+  ufi003-reliance-mcfg.service: enabled, active (exited)
+  ModemManager.service: active
+  Commercial-Reliance: Active
+  ims/imsp/imsa: present
+
+Rollback:
+  systemctl disable --now ufi003-reliance-mcfg.service
+  A later whole-device cold boot will naturally restore the original CT config.
+

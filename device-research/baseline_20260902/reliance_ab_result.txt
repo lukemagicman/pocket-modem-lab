@@ -1,0 +1,28 @@
+Constant conditions:
+  Hardware: second UFI003 MSM8916 stick
+  MPSS runtime: UFI003_CT 20211210 1 [Nov 04 2016 02:00:00]
+  Original modemst1/modemst2/fsg/fsc retained
+  SIM state: missing
+
+Baseline active MCFG:
+  Commercial-SRLTE-SS-CT
+  IMS services: absent
+
+Runtime A/B operation:
+  Deactivated Commercial-SRLTE-SS-CT
+  Activated Commercial-Reliance
+  Reliance status after modem subsystem restart: Active
+
+QMI services added after Reliance activation:
+  ims (1.0)
+  imsp (1.0)
+  imsa (1.0)
+
+Cold reboot result:
+  Commercial-SRLTE-SS-CT: Active
+  Commercial-Reliance: Inactive
+  ims/imsp/imsa: absent
+
+Interpretation:
+  MCFG controls IMS service publication in this MPSS build.
+  A boot-time selection or persistence mechanism restores the CT profile.

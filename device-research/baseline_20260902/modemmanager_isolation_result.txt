@@ -1,0 +1,33 @@
+Boot-time ModemManager isolation experiment, 2026-09-02
+
+Precondition:
+  ModemManager was enabled and active before the experiment.
+  Commercial-Reliance was set as pending and activated.
+  active=Reliance, pending=none, ims/imsp/imsa present.
+
+Isolation:
+  ModemManager was disabled before whole-device reboot.
+  After physical replug and fastboot continue:
+    ModemManager enabled=disabled
+    ModemManager active=inactive
+    active=Commercial-SRLTE-SS-CT
+    pending=none
+    ims/imsp/imsa absent
+
+Conclusion:
+  Debian ModemManager is not the component restoring CT. Restoration happens
+  in the modem/MPSS boot path, EFS/NV defaults, or another pre-userspace
+  platform selector.
+
+Rollback performed:
+  ModemManager was re-enabled and started.
+  Final state: enabled, active.
+
+Additional partition evidence:
+  Full modemst1, modemst2, fsg and fsc hashes were identical between:
+    1. Reliance active before a whole-device reboot
+    2. CT active after the whole-device reboot
+  Their original valid-length prefixes also match the pre-flash backup exactly.
+  Therefore the tested PDC Set Selected/Activate state is not persisted in
+  these raw eMMC partition bytes.
+

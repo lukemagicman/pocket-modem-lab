@@ -1,0 +1,27 @@
+Source-stick SIM control test, 2026-09-02
+
+Scope:
+  Read-only test on the user's source UFI003 stick. No PDC, NV, SIM power,
+  network-mode or filesystem changes were made.
+
+System:
+  Debian GNU/Linux 13 (trixie)
+  Linux 6.12.49-msm8916-g93a71ee9468d
+  Internal QMI port /dev/wwan0qmi0
+
+Same China Unicom physical SIM:
+  UIM card state=present
+  Application type=USIM
+  Application state=ready
+  Primary GW=session slot 1, application 1
+  DMS operating mode=online
+  ModemManager state=connected
+  Operator code=46001
+  Operator name=CHN-UNICOM
+  Registration state=home
+
+Conclusion:
+  The SIM card, insertion orientation and user handling are good. The repeated
+  no-atr-received result is specific to the second stick or its Debian boot/kernel/
+  board-support stack. The source stick was not modified.
+

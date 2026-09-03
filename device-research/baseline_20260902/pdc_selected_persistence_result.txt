@@ -1,0 +1,28 @@
+PDC selected-config persistence experiment, 2026-09-02
+
+Initial cold-boot state:
+  active  = 36:92:73:74:AC:CA:A3:44:0C:8C:15:BC:2C:65:DA:38:A9:52:FE:25
+            Commercial-SRLTE-SS-CT
+  pending = none
+
+After PDC Set Selected Config (software, Reliance):
+  active  = CT
+  pending = F8:65:20:0A:37:94:52:73:8A:56:9B:AD:C1:3E:ED:9F:EB:5C:6C:F4
+            Commercial-Reliance
+
+After PDC Activate Config / modem subsystem restart:
+  active  = Reliance
+  pending = none
+  services added = ims (1.0), imsp (1.0), imsa (1.0)
+
+After whole-device reboot and fastboot continue:
+  active  = CT
+  pending = none
+  ims/imsp/imsa absent
+
+Interpretation:
+  Set Selected Config works correctly for the running modem and survives an
+  intentional modem subsystem restart, but another boot-time selector restores
+  CT across a whole-device boot. The next discriminating test is a cold boot
+  with ModemManager disabled from startup.
+

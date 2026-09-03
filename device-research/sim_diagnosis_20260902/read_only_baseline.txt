@@ -1,0 +1,44 @@
+UFI003 SIM read-only baseline, 2026-09-02
+
+ModemManager:
+  state=failed
+  failed reason=sim-missing
+  plugin=qcom-soc
+  primary port=/dev/wwan0qmi0
+
+QMI UIM Get Card Status:
+  Slot 1 card state=error: no-atr-received (3)
+  UPIN state=not-initialized
+  Provisioning sessions do not exist
+
+QMI DMS:
+  Get PIN Status -> UimUninitialized (37)
+  Operating mode=shutting-down
+  HW restricted=no
+  Power source=external-source
+
+QMI NAS:
+  Registration=not-registered-searching
+  CS/PS=detached
+  Radio interface=none
+  Signal info=InformationUnavailable
+
+AT cross-check on both /dev/wwan0at0 and /dev/wwan0at1:
+  AT -> OK
+  AT+CPIN? -> +CME ERROR: 10 (SIM not inserted)
+  AT+CFUN? -> +CFUN: 0
+
+Other evidence:
+  UIM service exists at version 1.36.
+  UIM slot-status enumeration is NotSupported by this MPSS.
+  UIM personalization features are all disabled; this is not a SIM-lock error.
+  Linux regulator summary shows l6 configured for 1800mV but with use/open count 0.
+  This is not yet proof that physical SIM VCC is absent because MPSS may control
+  the PMIC rail outside Linux regulator consumers.
+
+Next discriminating test:
+  Temporarily set DMS operating mode to online, then immediately repeat DMS mode,
+  UIM card status and AT+CPIN?. If ATR appears, CFUN/power state was the blocker.
+  If no-atr-received remains, prioritize physical card contact, SIM VCC/reset/
+  clock, slot routing or board-specific modem hardware configuration.
+
